@@ -1,11 +1,27 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import { signIn } from "next-auth/react";
+import styles from "../styles/Home.module.css";
+import AuthBtn from "./components/auth-btn/auth-btn";
+import Link from "next/link";
+import { useEffect } from "react";
+import { collection, limit, onSnapshot, query } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  // useEffect(
+  //   () =>
+  //     onSnapshot(query(collection(db, "users"), limit(5)), (snapshot) => {
+  //       const profile = snapshot.docs.map((d) => ({
+  //         ...(d.data() as any),
+  //         docId: d.id,
+  //       }))[0];
+  //     }),
+  //   []
+  // );
   return (
     <>
       <Head>
@@ -26,7 +42,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{' '}
+              By{" "}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
@@ -117,7 +133,13 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <div>
+          <AuthBtn />
+        </div>
+        <div>
+          <Link href="auth/signin">456778</Link>
+        </div>
       </main>
     </>
-  )
+  );
 }
